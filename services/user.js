@@ -1,10 +1,7 @@
-const User = require('../models/index').getModel('user');
+const { user: User } = require('../models');
 
-const user = {
-    async login(userData) {
-        const result = await User.findOne(userData);
-        return result;
+module.exports = {
+    login(userData) {
+        return User.findOne(userData);
     },
 };
-
-module.exports = user;

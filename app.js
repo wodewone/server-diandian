@@ -30,8 +30,8 @@ app.use(helmet());
 app.use(cors(corsHandler));
 
 // Routes
-app.use(publicRouter.routes(), publicRouter.allowedMethods());
-app.use(privateRouter.routes(), privateRouter.allowedMethods());
+app.use(publicRouter.routes()).use(publicRouter.allowedMethods());
+app.use(privateRouter.routes()).use(privateRouter.allowedMethods());
 
 // Response
 app.use(responseHandler);

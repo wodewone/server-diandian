@@ -4,7 +4,7 @@
   "author": "wodewone",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "pm2-dev start ecosystem.config.js --env dev",
+    "dev": "pm2-dev start ecosystem.config.js --env dev --ignore logs",
     "test": "pm2 start ecosystem.config.js --env test",
     "pro": "pm2 start ecosystem.config.js --env pro",
     "logs": "pm2 logs",

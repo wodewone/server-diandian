@@ -1,5 +1,8 @@
 const path = require('path');
 
+const database = {
+    main: 'yueer',
+};
 module.exports = {
     port: '3001',
     secret: 'secret',
@@ -7,11 +10,11 @@ module.exports = {
     logPath: path.resolve(__dirname, './logs/app.log'),
     mongoDB: {
         origin: 'mongodb+srv',
-        database: 'yueer',
+        database: database.main,
         username: 'root',
         password: 'root',
         host: 'huobi.l4yiu.mongodb.net',
         port: 27017,
     },
-    mongoUrl: 'mongodb+srv://root:root@huobi.l4yiu.mongodb.net/yueer?retryWrites=true&w=majority',
+    mongoUrl: `mongodb+srv://root:root@huobi.l4yiu.mongodb.net/${database.main}?retryWrites=true&w=majority`,
 };
