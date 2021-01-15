@@ -19,14 +19,17 @@ module.exports = {
         env_pro: {
             NODE_ENV: 'production',
             REMOTE_ADDR: '',
+            NODE_PATH: './',
         },
         env_dev: {
             NODE_ENV: 'development',
             REMOTE_ADDR: '',
+            NODE_PATH: './',
         },
         env_test: {
             NODE_ENV: 'test',
             REMOTE_ADDR: '',
+            NODE_PATH: './',
         },
     }],
 };

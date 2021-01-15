@@ -1,15 +1,15 @@
 const koaJwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+const { secret } = require('../config');
 
-const jwtMiddleware = koaJwt({ secret: config.secret });
+koaJwt({ secret });
 
 module.exports = (ctx, next) => {
     // 将 token 中的数据解密后存到 ctx 中
     try {
         if (typeof ctx.request.headers.authorization === 'string') {
-            const token = ctx.request.headers.authorization.slice(7);
-            ctx.jwtData = jwt.verify(token, config.secret);
+            const token = ctx.request.headers.authorization;
+            ctx.jwtData = jwt.verify(token, secret);
         } else {
             // eslint-disable-next-line no-throw-literal
             throw { code: 401, message: 'no authorization' };
@@ -20,5 +20,3 @@ module.exports = (ctx, next) => {
     }
     next();
 };
-
-module.exports = jwtMiddleware;

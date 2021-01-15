@@ -5,7 +5,7 @@ const database = {
 };
 module.exports = {
     port: '3001',
-    secret: 'secret',
+    secret: 'cynthia',
     publicDir: path.resolve(__dirname, './public'),
     logPath: path.resolve(__dirname, './logs/app.log'),
     mongoDB: {

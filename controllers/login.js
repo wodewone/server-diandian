@@ -20,7 +20,8 @@ module.exports = async (ctx, next) => {
             // eslint-disable-next-line no-underscore-dangle
             data: user._id,
             // 设置 token 过期时间
-            exp: Math.floor(Date.now() / 1000) + (60 * 60), // 60 seconds * 60 minutes = 1 hour
+            // exp: Math.floor(Date.now() / 1000) + (60 * 60) * 24, // 60 seconds * 60 minutes * 24hours = 1 Day
+            exp: Math.floor(Date.now() / 1000),
         }, config.secret);
         ctx.result = {
             token,
