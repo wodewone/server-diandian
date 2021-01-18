@@ -16,6 +16,7 @@ module.exports = {
             4,
             { SwitchCase: 1 },
         ],
+        'import/no-unresolved': 'off',
         'max-len': ['error', { code: 300 }],
     },
 };

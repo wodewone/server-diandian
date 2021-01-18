@@ -35,10 +35,33 @@ const getRouterTree = (dirPath) => {
  * @param dirPath
  * @returns {boolean|*[]}
  */
-module.exports = (dirPath = __dirname) => {
+const routerConfig = (dirPath = __dirname) => {
     const dir = fs.readdirSync(dirPath);
     if (!dir || !dir.length) {
         return false;
     }
     return getRouterTree(dirPath);
+};
+
+module.exports = {
+    routerConfig,
+    makeRouter: (routeRootPath) => routerConfig(routeRootPath).reduce((so, { file, route }) => {
+        try {
+            const routePath = path.join(routeRootPath, file);
+            // eslint-disable-next-line import/no-dynamic-require,global-require
+            const middleware = require(routePath);
+            if (typeof middleware !== 'function') {
+                return so;
+            }
+            if (route.split('/')[0] === 'get') {
+                so.push(['get', `/${route}`, middleware]);
+            } else {
+                so.push(['post', `/${route}`, middleware]);
+            }
+            return so;
+        } catch (e) {
+            console.warn('makeRouter', e);
+            return so;
+        }
+    }, []),
 };
