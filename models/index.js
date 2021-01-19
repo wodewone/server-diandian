@@ -12,5 +12,4 @@ fs.readdirSync(__dirname)
         const schema = new mongoose.Schema(modelFile.schema);
         models[modelFile.name] = mongoose.model(modelFile.name, schema, modelFile.name);
     });
-
 module.exports = models;

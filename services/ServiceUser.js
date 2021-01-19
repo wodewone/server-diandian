@@ -1,10 +1,10 @@
 const { User } = require('models');
 
 module.exports = {
-    userinfo(data) {
-        return User.findOne(data);
-    },
     create(query, data) {
         return User.updateOne(query, data, { upsert: true });
+    },
+    find(data, projection) {
+        return User.findOne(data, projection);
     },
 };

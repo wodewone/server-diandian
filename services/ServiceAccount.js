@@ -1,10 +1,10 @@
-const { Account: ServiceAccount } = require('models');
+const { Account } = require('models');
 
 module.exports = {
     register(data) {
-        return ServiceAccount.create(data);
+        return Account.create(data);
     },
     find(data) {
-        return ServiceAccount.findOne(data);
+        return Account.findOne(data);
     },
 };

@@ -9,8 +9,6 @@ module.exports = async (ctx, next) => {
         const { body } = ctx.request;
         await ServiceUser.create({ uuid }, body);
         ctx.result = {};
-        ctx.msg = 'yes';
     }
-    console.info(11, ctx);
     return next();
 };
