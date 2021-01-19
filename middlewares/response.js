@@ -5,12 +5,12 @@ const { logger } = require('./logger');
 const responseHandler = (ctx) => {
     if (ctx.result !== undefined) {
         ctx.type = 'json';
-        const { msg = null, result = null, success = false } = ctx;
+        const { msg = null, result = null } = ctx;
         ctx.body = {
             code: 200,
             data: result,
             msg,
-            success,
+            success: !!result,
         };
     }
 };

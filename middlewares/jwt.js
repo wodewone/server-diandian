@@ -1,6 +1,7 @@
 const koaJwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
-const { secret } = require('../config');
+const { CodedError } = require('lib/error');
+const { secret } = require('config');
 
 koaJwt({ secret });
 
@@ -11,12 +12,10 @@ module.exports = (ctx, next) => {
             const token = ctx.request.headers.authorization;
             ctx.jwtData = jwt.verify(token, secret);
         } else {
-            // eslint-disable-next-line no-throw-literal
-            throw { code: 401, message: 'no authorization' };
+            throw new CodedError('no authorization', 401);
         }
-    } catch (err) {
-        // eslint-disable-next-line no-throw-literal
-        throw { code: 401, message: err.message };
+    } catch ({ message }) {
+        throw new CodedError(message, 401);
     }
     next();
 };

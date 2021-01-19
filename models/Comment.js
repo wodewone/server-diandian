@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'Account',
+    name: 'Comment',
     schema: {
         uuid: String,
         username: String,

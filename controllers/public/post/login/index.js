@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { account: accountServices } = require('services');
+const { ServiceAccount } = require('services');
 const { InvalidQueryError } = require('lib/error');
 
 module.exports = async (ctx, next) => {
@@ -8,7 +8,7 @@ module.exports = async (ctx, next) => {
     if (!username || !password) {
         throw new InvalidQueryError();
     }
-    const user = await accountServices.login({
+    const user = await ServiceAccount.find({
         username,
         password,
     });
