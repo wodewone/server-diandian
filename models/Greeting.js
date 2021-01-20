@@ -1,9 +1,9 @@
 module.exports = {
-    name: 'Comment',
+    name: 'Greeting',
     schema: {
         uuid: String,
-        text: String,
-        time: Number,
+        content: String,
         createdTime: { type: Date, default: Date.now },
+        updatedTime: Date,
     },
 };
