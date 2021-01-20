@@ -1,5 +1,5 @@
 const { InvalidQueryError } = require('lib/error');
-const { ServiceGreeting } = require('services');
+const { ServiceUser } = require('services');
 
 module.exports = async (ctx, next) => {
     const { limit = 50 } = ctx.query;
@@ -9,6 +9,6 @@ module.exports = async (ctx, next) => {
     if (size <= min || size >= max) {
         throw new InvalidQueryError(`limit 需为${min}-${max}内的整数`);
     }
-    ctx.result = await ServiceGreeting.filters({}, { _id: 0, text: 1, time: 1 }).sort('time').limit(size);
+    ctx.result = await ServiceUser.filters({ blessing: { $gt: 50 } }, { _id: 0, avatarUrl: 1, blessing: 1 }).limit(size);
     return next();
 };

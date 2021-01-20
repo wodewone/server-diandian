@@ -9,5 +9,8 @@ module.exports = {
         country: String,
         language: String,
         gender: String,
+        blessing: String,
+        updatedTime: Date,
+        createdTime: { type: Date, default: Date.now },
     },
 };

@@ -7,7 +7,12 @@ module.exports = async (ctx, next) => {
     } else {
         const { data: uuid } = jwtData;
         const { body } = ctx.request;
-        await ServiceUser.create({ uuid }, body);
+        const user = await ServiceUser.find({ uuid });
+        if (user) {
+            await ServiceUser.update({ uuid }, body);
+        } else {
+            await ServiceUser.create({ uuid, ...body });
+        }
         ctx.result = {};
     }
     return next();

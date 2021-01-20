@@ -1,9 +1,9 @@
 const { InvalidQueryError } = require('lib/error');
-const { ServiceGreeting } = require('services');
+const { ServiceUser } = require('services');
 
 module.exports = async (ctx, next) => {
-    const { content } = ctx.request.body;
-    if (!content) {
+    const { blessing } = ctx.request.body;
+    if (!blessing) {
         throw new InvalidQueryError();
     }
     const { jwtData } = ctx;
@@ -12,15 +12,13 @@ module.exports = async (ctx, next) => {
         return next();
     }
     const { data: uuid } = jwtData;
-    const one = await ServiceGreeting.find({ uuid });
-    if (one) {
-        if (one.content === content) {
+    const user = await ServiceUser.find({ uuid });
+    if (user) {
+        if (user.blessing === blessing) {
             throw new InvalidQueryError('请勿提交重复的数据');
         }
-        await ServiceGreeting.update({ uuid, content, updatedTime: Date.now() });
-    } else {
-        await ServiceGreeting.create({ uuid, content });
+        await ServiceUser.update({ uuid }, { blessing });
+        ctx.result = {};
     }
-    ctx.result = {};
     return next();
 };

@@ -1,10 +1,19 @@
 const { User } = require('models');
 
 module.exports = {
-    create(query, data) {
-        return User.updateOne(query, data, { upsert: true });
+    create(data) {
+        return User.create(data);
     },
-    find(data, projection) {
-        return User.findOne(data, projection);
+    update(query, data) {
+        return User.updateOne(query, {
+            ...data,
+            updatedTime: Date.now(),
+        });
+    },
+    find(query, projection) {
+        return User.findOne(query, projection);
+    },
+    filters(query, projection) {
+        return User.find(query, projection);
     },
 };
