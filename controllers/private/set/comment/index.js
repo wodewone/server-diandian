@@ -3,7 +3,7 @@ const { ServiceComment } = require('services');
 
 module.exports = async (ctx, next) => {
     const { text, time } = ctx.request.body;
-    if (!text || !time) {
+    if (text === undefined || time === undefined) {
         throw new InvalidQueryError();
     }
     const { jwtData } = ctx;
