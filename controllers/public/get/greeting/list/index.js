@@ -9,6 +9,8 @@ module.exports = async (ctx, next) => {
     if (size <= min || size >= max) {
         throw new InvalidQueryError(`limit 需为${min}-${max}内的整数`);
     }
-    ctx.result = await ServiceUser.filters({ blessing: { $gt: 50 } }, { _id: 0, avatarUrl: 1, blessing: 1 }).limit(size);
+    ctx.result = await ServiceUser.filters({ blessing: { $gt: 50 } }, {
+        _id: 0, avatarUrl: 1, blessing: 1, uuid: 1,
+    }).limit(size);
     return next();
 };

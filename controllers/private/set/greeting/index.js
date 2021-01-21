@@ -18,7 +18,9 @@ module.exports = async (ctx, next) => {
             throw new InvalidQueryError('请勿提交重复的数据');
         }
         await ServiceUser.update({ uuid }, { blessing });
-        ctx.result = {};
+        const { avatarUrl } = user;
+        const userGreeting = { avatarUrl, uuid, blessing };
+        ctx.result = userGreeting;
     }
     return next();
 };
