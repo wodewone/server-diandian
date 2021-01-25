@@ -8,6 +8,10 @@ module.exports = {
         appid: 'wxdccdda64c1ed48ec',
         secret: 'acec92a99505324b6d10e655a7c4711b',
     },
+    qiniu: {
+        access: 'ET6ZN_vZ3tAFWCel2Ijw1Ck3Q9XBf8AbZCZpmv7E',
+        secret: 'IQ-lS6Xzc3rFP2Sv636amIyt6ATUN4dKaw_xAhP_',
+    },
     port: '3001',
     secret: 'cynthia',
     publicDir: path.resolve(__dirname, './public'),

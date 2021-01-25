@@ -24,7 +24,8 @@
     "log4js": "^6.3.0",
     "md5": "^2.3.0",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.11"
+    "mongoose": "^5.11.11",
+    "qiniu": "^7.3.2"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
