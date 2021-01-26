@@ -9,6 +9,7 @@ module.exports = {
         secret: 'acec92a99505324b6d10e655a7c4711b',
     },
     qiniu: {
+        cdnUrl: 'http://cdn.wodewone.com',
         access: 'ET6ZN_vZ3tAFWCel2Ijw1Ck3Q9XBf8AbZCZpmv7E',
         secret: 'IQ-lS6Xzc3rFP2Sv636amIyt6ATUN4dKaw_xAhP_',
     },
