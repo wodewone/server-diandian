@@ -3,7 +3,7 @@ const Router = require('koa-router');
 const { makeRouter } = require('./utils');
 
 const router = new Router();
-router.prefix('/v1');
+router.prefix('/point/v1');
 
 const routeRootPath = path.join(__dirname, '../controllers/public');
 const routerList = makeRouter(routeRootPath);

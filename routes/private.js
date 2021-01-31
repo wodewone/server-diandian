@@ -4,7 +4,7 @@ const jwtMiddleware = require('middlewares/jwt');
 const { makeRouter } = require('./utils');
 
 const router = new Router();
-router.prefix('/v1');
+router.prefix('/point/v1');
 router.use(jwtMiddleware);
 
 const routeRootPath = path.join(__dirname, '../controllers/private');
