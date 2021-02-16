@@ -16,7 +16,7 @@ module.exports = (ctx, next) => {
     const options = {
         scope: `wodewone:${scope}`,
         isPrefixalScope: 1,
-        returnBody: '{"key":"$(key)","width":"$(imageInfo.width)","height":"$(imageInfo.height)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
+        returnBody: '{"key":"$(key)","hash":"$(etag)","width":"$(imageInfo.width)","height":"$(imageInfo.height)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
     };
     const putPolicy = new qiniu.rs.PutPolicy(options);
     const token = putPolicy.uploadToken(mac);
