@@ -13,10 +13,16 @@ module.exports = async (ctx, next) => {
         _id: 0,
         key: 1,
         hash: 1,
+        width: 1,
+        height: 1,
     });
-    ctx.result = keys.map(({ key, hash }) => ({
-        hash,
-        url: `${domain}/${key}`,
-    }));
+    ctx.result = keys.map(({
+        key, hash, width, height,
+    }) => {
+        const url = `${domain}/${key}`;
+        return {
+            key, hash, width, height, url,
+        };
+    });
     return next();
 };
