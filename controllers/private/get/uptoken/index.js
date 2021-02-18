@@ -1,31 +1,42 @@
-const { qiniu: { access, secret } } = require('config');
+const {
+    qiniu: {
+        access, secret, cdnUrl, personMax,
+    },
+} = require('config');
 const qiniu = require('qiniu');
 const md5 = require('md5');
-const { qiniu: { cdnUrl: domain } } = require('config');
+const ServicePhoto = require('services/ServicePhoto');
 
-module.exports = (ctx, next) => {
+module.exports = async (ctx, next) => {
     const { jwtData } = ctx;
     if (!jwtData.data) {
         ctx.result = jwtData;
         return next();
     }
-    const { data: userId } = jwtData;
+    const { data: uuid } = jwtData;
     const mac = new qiniu.auth.digest.Mac(access, secret);
-    const scope = md5(userId);
+    const scope = md5(uuid);
 
     const options = {
         scope: `wodewone:${scope}`,
         isPrefixalScope: 1,
         returnBody: '{"key":"$(key)","hash":"$(etag)","width":"$(imageInfo.width)","height":"$(imageInfo.height)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
     };
-    const putPolicy = new qiniu.rs.PutPolicy(options);
-    const token = putPolicy.uploadToken(mac);
-    // const url = `${domain}/${scope}`;
-    const url = domain;
-    ctx.result = {
-        token,
-        url,
+    const list = await ServicePhoto.filters({ uuid }) || [];
+    const result = {
+        max: personMax,
+        url: cdnUrl,
         scope,
     };
+    if (list.length >= personMax) {
+        ctx.result = result;
+    } else {
+        const putPolicy = new qiniu.rs.PutPolicy(options);
+        const token = putPolicy.uploadToken(mac);
+        ctx.result = {
+            token,
+            ...result,
+        };
+    }
     return next();
 };
