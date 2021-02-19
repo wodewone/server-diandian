@@ -19,8 +19,12 @@ module.exports = async (ctx, next) => {
 
     const options = {
         scope: `wodewone:${scope}`,
+        expires: 7200,
         isPrefixalScope: 1,
-        returnBody: '{"key":"$(key)","hash":"$(etag)","width":"$(imageInfo.width)","height":"$(imageInfo.height)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
+        fsizeMin: 1024,
+        fsizeLimit: 1024 * 1024 * 5,
+        mimeLimit: 'image/jpeg;image/png;image/jpg',
+        returnBody: '{"key":"$(key)","hash":"$(etag)","width":"$(imageInfo.width)","height":"$(imageInfo.height)"}',
     };
     const list = await ServicePhoto.filters({ uuid }) || [];
     const result = {
