@@ -8,6 +8,7 @@ module.exports = async (ctx, next) => {
         return next();
     }
     const { data: uuid } = jwtData;
+    const { limit = 20, offset = 0 } = ctx.query;
 
     const keys = await ServicePhoto.filters({ uuid }, {
         _id: 0,
@@ -15,7 +16,8 @@ module.exports = async (ctx, next) => {
         hash: 1,
         width: 1,
         height: 1,
-    });
+    }).limit(+limit).skip(+offset);
+    console.info(2911, uuid, keys);
     ctx.result = keys.map(({
         key, hash, width, height,
     }) => {

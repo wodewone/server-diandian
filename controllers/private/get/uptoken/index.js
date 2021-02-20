@@ -22,7 +22,7 @@ module.exports = async (ctx, next) => {
         expires: 7200,
         isPrefixalScope: 1,
         fsizeMin: 1024,
-        fsizeLimit: 1024 * 1024 * 5,
+        fsizeLimit: 1024 * 1024 * 3,
         mimeLimit: 'image/jpeg;image/png;image/jpg',
         returnBody: '{"key":"$(key)","hash":"$(etag)","width":"$(imageInfo.width)","height":"$(imageInfo.height)"}',
     };

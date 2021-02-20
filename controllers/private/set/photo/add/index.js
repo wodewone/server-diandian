@@ -12,7 +12,12 @@ module.exports = async (ctx, next) => {
     if (!list || !list.length) {
         throw new InvalidQueryError();
     }
-    const $list = list.map((o) => ({ uuid, ...o }));
+    const $list = list.reduce((so, o) => {
+        if (o.hash) {
+            so.push({ uuid, ...o });
+        }
+        return so;
+    }, []);
     await ServicePhoto.add($list);
     ctx.result = {};
     return next();
