@@ -17,7 +17,6 @@ module.exports = async (ctx, next) => {
         width: 1,
         height: 1,
     }).limit(+limit).skip(+offset);
-    console.info(2911, uuid, keys);
     ctx.result = keys.map(({
         key, hash, width, height,
     }) => {
