@@ -2,7 +2,7 @@ const { InvalidQueryError } = require('lib/error');
 const { ServiceUser } = require('services');
 
 module.exports = async (ctx, next) => {
-    const { blessing } = ctx.request.body;
+    const { blessing, shareId } = ctx.request.body;
     if (!blessing) {
         throw new InvalidQueryError();
     }
