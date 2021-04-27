@@ -1,6 +1,7 @@
 module.exports = {
     name: 'User',
     schema: {
+        userId: Number,
         uuid: String,
         nickName: String,
         avatarUrl: String,
